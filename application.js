@@ -40,6 +40,24 @@ phina.define("Application", {
             return false;
         }, true);
         this.domElement.addEventListener("drop", function(e) {
+            try {
+                for (var i = 0; i < e.dataTransfer.files.length; i++) {
+                    var file = e.dataTransfer.files[i];
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        console.dir(e);
+                        var data = e.target.result;
+                        var tex = phina.asset.Texture();
+                        tex.onload = function() {
+                            var newTex = Tex(this).addChildTo(scene);
+                            app.focus = newTex;
+                        };
+                    };
+                    reader.readAsDataURL(file);
+                };
+            } catch(ex) {
+                console.error(ex);
+            }
             e.preventDefault();
             return false;
         }, true);
@@ -110,7 +128,7 @@ phina.define("MainScene", {
     },
 });
 
-phina.define("Texture", {
+phina.define("Tex", {
     superClass: "phina.display.Sprite",
 
     init: function(sprite) {
