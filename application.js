@@ -6,10 +6,13 @@
  */
 
 //インスタンス
-var app;
+var app, app2;
 phina.main(function() {
     app = Application();
     app.run();
+
+    app2 = Interface();
+    app2.run();
 
     moveGridSizeX = document.getElementById("moveGridSizeX");
     moveGridSizeY = document.getElementById("moveGridSizeY");
@@ -22,8 +25,8 @@ phina.define("Application", {
         this.superInit({
             query: '#app',
             backgroundColor: 'black',
-            width: 256,
-            height: 256,
+            width: 512,
+            height: 512,
             fit: false,
         });
         this.focus = null;
@@ -48,10 +51,10 @@ phina.define("Application", {
                         console.dir(e);
                         var data = e.target.result;
                         var tex = phina.asset.Texture();
-                        tex.onload = function() {
+                        tex.load(e.target.result).then(function() {
                             var newTex = Tex(this).addChildTo(scene);
                             app.focus = newTex;
-                        };
+                        }.bind(tex));
                     };
                     reader.readAsDataURL(file);
                 };
@@ -95,6 +98,7 @@ phina.define("Application", {
                 var w = ~~document.getElementById("canvasWidth").value;
                 var h = ~~document.getElementById("canvasHeight").value;
                 app.canvas.setSize(w, h);
+                app2.canvas.setSize(256, Math.max(256, h));
             });
         });
 
@@ -133,7 +137,7 @@ phina.define("Tex", {
 
     init: function(sprite) {
         this.superInit(sprite);
-        this.origin.set(0, 0);
+        this.setOrigin(0, 0);
 
         var param = {
             width: this.width,
@@ -145,16 +149,17 @@ phina.define("Tex", {
         this.border = phina.display.RectangleShape(param)
             .addChildTo(this)
             .setOrigin(0, 0)
-            .setInteractive(true);
+            .setPosition(-8, -8);
 
         this.boundingType = "rect";
+        this.setInteractive(true);
     },
 
     update: function(app) {
         this.border.visible = (app.focus === this);
     },
 
-    onpointingstart: function() {
+    onpointstart: function() {
         app.focus = this;
     }
 
