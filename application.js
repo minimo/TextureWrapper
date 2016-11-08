@@ -98,7 +98,7 @@ phina.define("Application", {
                 var w = ~~document.getElementById("canvasWidth").value;
                 var h = ~~document.getElementById("canvasHeight").value;
                 app.canvas.setSize(w, h);
-                app2.canvas.setSize(256, Math.max(256, h));
+                app2.canvas.setSize(256, Math.max(512, h));
             });
         });
 
