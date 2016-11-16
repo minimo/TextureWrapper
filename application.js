@@ -115,18 +115,20 @@ phina.define("MainScene", {
     update: function() {
         var kb = app.keyboard;
         if (app.focus) {
-            var g = ~~moveGridSizeX.value;
-            if (kb.getKeyDown("left")) {
-                app.focus.x -= g;
-            } else if (kb.getKeyDown("right")) {
-                app.focus.x += g;
-            }
+            if (moveMode) {
+                var g = ~~moveGridSizeX.value;
+                if (kb.getKeyDown("left")) {
+                    app.focus.x -= g;
+                } else if (kb.getKeyDown("right")) {
+                    app.focus.x += g;
+                }
 
-            var g = ~~moveGridSizeY.value;
-            if (kb.getKeyDown("up")) {
-                app.focus.y -= g;
-            } else if (kb.getKeyDown("down")) {
-                app.focus.y += g;
+                var g = ~~moveGridSizeY.value;
+                if (kb.getKeyDown("up")) {
+                    app.focus.y -= g;
+                } else if (kb.getKeyDown("down")) {
+                    app.focus.y += g;
+                }
             }
         }
     },

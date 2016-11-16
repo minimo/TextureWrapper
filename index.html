@@ -8,8 +8,8 @@
         <ul>
             <li>
                 キャンバスのサイズ<br>
-                width<input type="number" id="canvasWidth" class="canvasSize" value="512"><br>
-                height<input type="number" id="canvasHeight" class="canvasSize" value="512"><br>
+                width  <input type="number" id="canvasWidth" class="canvasSize" value="512"><br>
+                height <input type="number" id="canvasHeight" class="canvasSize" value="512"><br>
             </li>
             <li>
                 移動グリッドサイズ<br>
@@ -17,12 +17,14 @@
             </li>
         </ul>
     </div>
+    <canvas id="interface" valign="top"></canvas>
     <div>↓画像ファイルをドラッグ&amp;ドロップしよう！ 画像はカーソルキーで移動できます</div>
-        <canvas id="interface" valign="top"></canvas>    <canvas id="app" valign="top"></canvas>
+    <canvas id="app" valign="top"></canvas><br>
     <div>
         <button id="ok">save</button>
         <button id="del">delete</button>
         <button id="clear">clear</button>
+        <button id="cut">cut</button>
     </div>
 
     <script src="phina.js"></script>

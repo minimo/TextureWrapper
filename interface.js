@@ -11,13 +11,14 @@ phina.define("Interface", {
     init: function() {
         this.superInit({
             query: '#interface',
-            backgroundColor: 'black',
-            width: 256,
-            height: 512,
+            backgroundColor: 'white',
+            width: 512,
+            height: 64,
             fit: false,
         });
 
         this.replaceScene(InterfaceScene());
+        this.moveMode = false;
     },
 });
 
@@ -27,11 +28,11 @@ phina.define("InterfaceScene", {
         this.superInit();
 
         var param = {
-            width: 256,
-            height: 512,
+            width: 512,
+            height: 64,
             fill: "transparent",
             stroke: "black",
-            strokeWidth: 2,
+            strokeWidth: 1,
         };
         this.border = phina.display.RectangleShape(param)
             .addChildTo(this)
